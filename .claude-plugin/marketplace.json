@@ -1,0 +1,13 @@
+{
+  "name": "tarvena",
+  "metadata": { "description": "Operaty wodnoprawne i obliczenia w Tarvena." },
+  "owner": { "name": "Tarvena" },
+  "plugins": [
+    {
+      "name": "tarvena",
+      "source": "./plugins/tarvena",
+      "description": "Operaty wodnoprawne, zlewnie, obliczenia i wnioski w Tarvena.",
+      "version": "0.97.4"
+    }
+  ]
+}

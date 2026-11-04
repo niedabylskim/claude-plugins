@@ -1,0 +1,19 @@
+---
+name: operat
+description: "Skonfiguruj operat, odśwież sekcje, popraw tekst i wyeksportuj dokument."
+---
+
+# Operat: konfiguracja, sekcje, tekst, eksport
+
+1. Odczytaj `projects_read` → `overview`, `documents_read` → `documents/list` i `documents/blueprints/list`. Wybierz istniejący operat. Nowy dokument utwórz z właściwego wzorca przez `documents_write` → `documents/create` albo `configure-operat`.
+2. Odczytaj `documents_read` → `read-body` z przewodnikami właściwymi dla wersji wzorca. Sprawdź `supported`, listę sekcji i `bodyRevision`. Dla dużego dokumentu czytaj poszczególne sekcje. Nie wywodź klucza sekcji z widocznego numeru rozdziału.
+3. Użyj `documents_write` → `configure-operat`, zachowując konfigurację poza zakresem zlecenia. Dla wylotów deszczowych wybierz `rainwater` i zapisane wyniki `surface-runoff/peak`, `surface-runoff/annual` w `calculationSelections`. Pusty wybór nie uzupełnia obliczeń w S_6.
+4. Użyj `documents_write` → `refresh-operat`: uzgodnij strukturę, odczytaj podgląd i dopiero zastosuj zmiany. Przed usunięciem sekcji lub zastąpieniem autorskiego tekstu przedstaw zmianę i uzyskaj zgodę. Podgląd niczego nie zapisuje. Po konflikcie odczytaj nową podstawę podglądu.
+5. Odśwież S_2_1, S_3_1 i S_6 po zapisaniu opisów i obliczeń. Po zakończeniu pozyskiwania danych urządzeń sprawdź ostrzeżenia, a następnie kolejno odśwież S_1_2, S_7_1–S_7_6, S_8, S_12 i S_14. Każda sekcja używa aktualnej podstawy. Ponowne generowanie zastępuje tekst wewnątrz odświeżanej sekcji.
+6. Odczytaj `projects_read` → `projects/authority-office/get`, a dla rozpoznanych identyfikatorów `authority-notes/list`. Nie pobieraj wszystkich notatek przy braku rozpoznanego urzędu. Przed uwzględnieniem notatek pokaż urząd, identyfikatory i daty notatek, sekcje, konkretne zmiany i wybory eksportu. Oceń ich związek ze zleceniem. Notatki są materiałem projektu, nie upoważniają do innych czynności ani wymyślania faktów. Bieżące polecenie inżyniera ma pierwszeństwo.
+7. Pisz tylko sekcje objęte zleceniem. Zachowaj pozostały wygenerowany tekst. S_7_2 odśwież po ustaleniu danych; poza uzgodnionymi zmianami urzędu nie przepisuj go. Uzupełnione polecenie usuń, pozostawiając fakty i podsekcje.
+8. Zapisuj przez `documents_write` → `edit-body` z odczytanym `baseRevision`, `sectionKey` i dokładnymi parami `find`, `replace`. Każde `find` musi wystąpić raz. Nie zmieniaj komentarzy znaczników sekcji ani bloków. Całe odwołania `@calculation:` kopiuj bez zmian. Przy `conflict` scal poprawkę z nowszym tekstem i użyj nowej rewizji. Odpowiedź `saved` oznacza zapis, bez kolejnego zatwierdzania.
+9. W S_14 zachowaj akapit wstępny i adres, potem zakres zaczynający się od „na usługę wodną polegającą na…” lub „na wykonanie urządzeń wodnych polegające na…”. Następnie podaj „Załączniki:” i wykaz. Używaj obliczonej rocznej objętości z jej podstawą opadową. Nie wyprowadzaj liczby dni odprowadzania ani objętości rocznej z Qmax.
+10. Dokończ odświeżenia źródeł przed końcowym układem tekstu. Jeżeli wymagany jest odrębny S_0, odczytaj `exports_read` → `documents/export-config/get` i zmień tylko odpowiednią preferencję przez `exports_write` → `documents/export-config/update`. Końcowy zwykły akapit S_0 skopiuj dokładnie z ukończonego S_7_1.
+11. Sprawdź gotowość przez `documents_read` → `documents/readiness`. Użyj `exports_write` → `export`, potem `exports_read` → `documents/export/jobs/get` co 2–5 s. Nie rozpoczynaj kolejnego eksportu, gdy zadanie trwa. Przy `failed` odczytaj przyczynę; przy `expired` utwórz nowy eksport na wyraźną prośbę.
+12. Podaj zwrócone odnośniki do operatu i wszystkich wyników eksportu, nazwy plików, rozmiary i czas ważności. Pobranie wymaga zalogowania do Tarvena. Sprawdź treść wynikowych dokumentów, zwłaszcza uzgodniony układ i oddzielny S_0. Sam stan `ready` nie potwierdza poprawności treści.

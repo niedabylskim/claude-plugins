@@ -1,0 +1,5 @@
+{
+  "mcpServers": {
+    "tarvena": { "type": "http", "url": "https://tarvena.pl/mcp" }
+  }
+}
