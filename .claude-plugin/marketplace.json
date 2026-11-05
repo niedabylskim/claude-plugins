@@ -7,7 +7,7 @@
       "name": "tarvena",
       "source": "./plugins/tarvena",
       "description": "Operaty wodnoprawne, zlewnie, obliczenia i wnioski w Tarvena.",
-      "version": "0.97.4"
+      "version": "0.97.6"
     }
   ]
 }

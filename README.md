@@ -1,6 +1,6 @@
 # Tarvena dla Claude
 
-Wersja 0.97.4. Operaty wodnoprawne, mapy, zlewnie, obliczenia i wnioski w projektach Tarvena.
+Wersja 0.97.6. Operaty wodnoprawne, mapy, zlewnie, obliczenia i wnioski w projektach Tarvena.
 
 ```text
 /plugin marketplace add niedabylskim/claude-plugins
